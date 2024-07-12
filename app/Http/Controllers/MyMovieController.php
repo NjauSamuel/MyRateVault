@@ -33,7 +33,7 @@ class MyMovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('my-movies.add');
     }
 
     /**

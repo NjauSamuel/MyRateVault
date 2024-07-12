@@ -68,7 +68,7 @@
     </div>
 
     <div class="mx-auto max-w-max container add">
-        <a href="#" class="button" >
+        <a href="{{ route('my-movies.create') }}" class="button" >
             Add Movie
         </a>
     </div>

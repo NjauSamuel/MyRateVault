@@ -4,10 +4,12 @@
 @section('title', 'Edit Movies')
 
 @section('content')
-<div class="content">
-  <h1 class="text-2xl font-bold">Title: {{ $movie->title }}</h1>
-  <p class="description">Edit Movie Rating</p>
+<div class="content p-6">
+    <h1 class="heading">Edit Movie Rating</h1>
 
+    <div class="form-title">
+        <p class="text-2xl font-bold">Title: {{ $movie->title }}</p>
+    </div> 
   
 
   <form action="{{ route('my-movies.update', $movie->id) }}" method="POST">
