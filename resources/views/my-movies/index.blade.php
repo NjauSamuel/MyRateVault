@@ -39,7 +39,25 @@
                         </p>
 
                         <a href="{{ route('my-movies.edit', $movie) }}" class="button">Update</a>
-                        <a href="#" class="button delete-button">Delete</a>
+                        <a class="button delete-button" onclick="document.getElementById('delete-dialog-{{ $movie->id }}').showModal();">Delete</a>
+
+                        <!-- Delete Confirmation Dialog -->
+                        <dialog id="delete-dialog-{{ $movie->id }}" class="p-6 bg-white rounded-md shadow-md">
+                            <form method="dialog">
+                                <p class="text-lg">Are you sure you want to delete this movie?</p>
+                                <p class="font-bold my-1">{{ $movie->title }}</p>
+                                <menu class="flex justify-center space-x-10">
+                                    <button type="button" class="bg-green-500 text-white px-4 py-2 rounded" onclick="document.getElementById('delete-form-{{ $movie->id }}').submit();">Yes</button>
+                                    <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded" onclick="document.getElementById('delete-dialog-{{ $movie->id }}').close();">No</button>
+                                </menu>
+                            </form>
+                        </dialog>
+
+                        <!-- Hidden Form to submit delete request -->
+                        <form id="delete-form-{{ $movie->id }}" action="{{ route('my-movies.destroy', $movie) }}" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
 
                     </div>
                 </div>
