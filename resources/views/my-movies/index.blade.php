@@ -6,7 +6,22 @@
 
     <div>
 
-        <h1 class="heading">My Top 10 Movies</h1>
+        <div class="flex justify-between pr-6 mt-4">
+            <div>
+                <h1 class="heading">My Top 10 Movies</h1>
+            </div>
+
+            <div class="flex items-center">
+                <form action="{{ route('auth.destroy') }}" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+
 
         <p class="description">These are my all-time favourite movies.</p>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyMovieController;
 
@@ -8,13 +9,26 @@ use App\Http\Controllers\MyMovieController;
 //     return view('index');
 // });
 
-Route::get('/', fn() => to_route('my-movies.index'));
+Route::get('/', fn() => to_route('auth.create'));
+
+Route::get('login', fn() => to_route('auth.create'))->name('login');
+
+Route::delete('logout', fn()=> to_route('auth.destroy'))->name('logout');
+
+Route::resource('auth', AuthController::class)
+    ->only(['create', 'store']);
+
+Route::delete('auth', [AuthController::class, 'destroy'])
+    ->name('auth.destroy');
 
 
-Route::resource('my-movies', MyMovieController::class)
-    ->only(["index","create", "store", "edit","update", "destroy"]);
+Route::middleware('auth')->group(function () {    
+
+    Route::resource('my-movies', MyMovieController::class)
+        ->only(["index","create", "store", "edit","update", "destroy"]);
 
 
-Route::get('my-movies/find_movie', [MyMovieController::class, 'find_movie'])
-    ->name('my-movies.find_movie');
+    Route::get('my-movies/find_movie', [MyMovieController::class, 'find_movie'])
+        ->name('my-movies.find_movie');
 
+});
