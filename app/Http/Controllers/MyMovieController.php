@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\MyMovie;
+use App\Models\User;
+use Illuminate\Support\Facades\Http;
 
 class MyMovieController extends Controller
 {
@@ -39,9 +41,58 @@ class MyMovieController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, MyMovie $myMovie)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $movieTitle = $request->input('title');
+        $response = Http::withOptions(['verify' => false])->get(env('MOVIE_DB_SEARCH_URL'), [
+            'api_key' => env('MOVIE_DB_API_KEY'),
+            'query' => $movieTitle
+        ]);
+
+        $data = $response->json()['results'];
+
+        dd($myMovie);
+
+        return view('my-movies.select', ['options' => $data]);
+    }
+
+    public function find_movie(Request $request, User $user)
+    {
+        $movieApiId = $request->query('id');
+
+        if ($movieApiId) {
+            $movieApiUrl = env("MOVIE_DB_INFO_URL")."/$movieApiId";
+            $response = Http::withOptions(['verify' => false])->get($movieApiUrl, [
+                'api_key' => env('MOVIE_DB_API_KEY'), // Use your API key from the .env file
+                'language' => 'en-US',
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json();
+                
+                $newMovie = new MyMovie([
+                    'user_id' => $user->id,
+                    'title' => $data['title'],
+                    'year' => explode('-', $data['release_date'])[0], // Get the year from release_date
+                    'img_url' => "YOUR_MOVIE_DB_IMAGE_URL{$data['poster_path']}",
+                    'description' => $data['overview'],
+                ]);
+
+                $newMovie->save();
+
+                // Redirect to the edit route
+                dd($newMovie);
+                return redirect()->route('my-movies.edit', ['id' => $newMovie->id]);
+            }
+
+            return response()->json(['message' => 'Movie not found'], 404);
+        }
+
+        return response()->json(['message' => 'Invalid movie ID'], 400);
     }
 
     /**
