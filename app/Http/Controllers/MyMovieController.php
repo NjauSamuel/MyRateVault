@@ -55,8 +55,6 @@ class MyMovieController extends Controller
 
         $data = $response->json()['results'];
 
-        dd($myMovie);
-
         return view('my-movies.select', ['options' => $data]);
     }
 
@@ -75,18 +73,17 @@ class MyMovieController extends Controller
                 $data = $response->json();
                 
                 $newMovie = new MyMovie([
-                    'user_id' => $user->id,
+                    'user_id' => auth()->id(),
                     'title' => $data['title'],
                     'year' => explode('-', $data['release_date'])[0], // Get the year from release_date
-                    'img_url' => "YOUR_MOVIE_DB_IMAGE_URL{$data['poster_path']}",
+                    'img_url' => env("MOVIE_DB_IMAGE_URL")."{$data['poster_path']}",
                     'description' => $data['overview'],
                 ]);
 
                 $newMovie->save();
 
                 // Redirect to the edit route
-                dd($newMovie);
-                return redirect()->route('my-movies.edit', ['id' => $newMovie->id]);
+                return redirect()->route('my-movies.edit', $newMovie);
             }
 
             return response()->json(['message' => 'Movie not found'], 404);
