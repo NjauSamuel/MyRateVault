@@ -27,7 +27,18 @@ class MyMovieController extends Controller
             *all(): This is a static method that directly retrieves all records from the database table without considering any query builder methods.
         *Therefore, combining latest() with all() is not syntactically correct. Instead, use get() to execute the query built by latest().
          */
-        return view('my-movies.index', ['movies' => MyMovie::latest()->get()]);
+        
+         // Fetch movies ordered by rating in descending order
+        $movies = MyMovie::orderBy('rating', 'desc')->get();
+
+        // Assign rankings and save to database
+        foreach ($movies as $index => $movie) {
+            $movie->ranking = $index + 1; // Rank 1 for the highest rated movie
+            $movie->save(); // Save the ranking to the database
+        }
+
+
+        return view('my-movies.index', ['movies' => MyMovie::orderBy('rating', 'desc')->get()]);
     }
 
     /**

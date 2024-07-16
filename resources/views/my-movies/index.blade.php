@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'Python - Laravel')
+@section('title', 'PHP - Laravel')
 
 @section('content')
 
@@ -32,7 +32,7 @@
                 <div
                     class="front"
                     style=" background-image: url('{{ $movie->img_url }}'); ">
-                    <p class="large">1</p>
+                    <p class="large">{{ $movie->ranking }}</p>
                 </div>
 
                 <div class="back">
