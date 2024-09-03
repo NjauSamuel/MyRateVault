@@ -73,16 +73,13 @@ p.overview {
     margin: 1rem auto;
     position: relative;
 }
-@media screen and (max-width: 800px) {
+
+@media (max-width: 768px) {
     .card {
-        width: calc(50% - 3rem);
+        height: 500px; /* Height for mobile devices */
     }
 }
-@media screen and (max-width: 500px) {
-    .card {
-        width: 100%;
-    }
-}
+
 .front,
 .back {
     display: flex;
