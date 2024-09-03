@@ -65,8 +65,8 @@ p.overview {
 .card {
     color: inherit;
     cursor: pointer;
-    width: calc(33% - 3rem);
-    min-width: calc(33% - 3rem);
+    width: calc(80% - 3rem);
+    min-width: calc(70% - 3rem);
     height: 400px;
     min-height: 400px;
     perspective: 1000px;
