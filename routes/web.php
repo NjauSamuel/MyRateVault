@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyMovieController;
 
@@ -9,7 +10,7 @@ use App\Http\Controllers\MyMovieController;
 //     return view('index');
 // });
 
-Route::get('/', fn() => to_route('auth.create'));
+Route::get('/', fn() => to_route('movies.index'));
 
 Route::get('login', fn() => to_route('auth.create'))->name('login');
 
@@ -32,3 +33,6 @@ Route::middleware('auth')->group(function () {
         ->name('my-movies.find_movie');
 
 });
+
+Route::resource('movies', MovieController::class)
+    ->only(['index']);

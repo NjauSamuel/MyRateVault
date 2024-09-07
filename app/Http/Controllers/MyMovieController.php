@@ -16,17 +16,6 @@ class MyMovieController extends Controller
      */
     public function index()
     {
-        //// Fetch all movies
-        //$movies = MyMovie::all();
-        //dd(MyMovie::all());
-        // dd(MyMovie::latest()->get());
-        /**
-         * Here's a brief explanation of why MyMovie::latest()->all() is not valid:
-
-            *latest(): This is a query builder method that modifies the query to include an ORDER BY clause.
-            *all(): This is a static method that directly retrieves all records from the database table without considering any query builder methods.
-        *Therefore, combining latest() with all() is not syntactically correct. Instead, use get() to execute the query built by latest().
-         */
         
          // Fetch movies ordered by rating in descending order
         $movies = MyMovie::orderBy('rating', 'desc')->get();
@@ -37,7 +26,7 @@ class MyMovieController extends Controller
             $movie->save(); // Save the ranking to the database
         }
 
-
+        // dd($movies);
         return view('my-movies.index', ['movies' => MyMovie::orderBy('rating', 'desc')->get()]);
     }
 
