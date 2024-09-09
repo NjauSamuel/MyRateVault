@@ -24,6 +24,8 @@
 
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 
+        <link rel="stylesheet" href="{{ asset('assets/js/app.js') }}">
+
         @vite('resources/css/app.css')
 
 
