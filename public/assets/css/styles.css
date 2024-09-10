@@ -48,7 +48,7 @@ p.overview {
     position: relative;
 }
 @media (max-width: 768px) {
-    .card {
+    .heading {
         font-size: 1.2rem; /* Font for mobile devices */
     }
 }
