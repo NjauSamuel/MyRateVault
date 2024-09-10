@@ -47,6 +47,11 @@ p.overview {
     margin-bottom: 1rem;
     position: relative;
 }
+@media (max-width: 768px) {
+    .card {
+        font-size: 1.2rem; /* Font for mobile devices */
+    }
+}
 .heading:after {
     display: block;
     content: "";

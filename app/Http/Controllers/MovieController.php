@@ -50,7 +50,8 @@ class MovieController extends Controller
         foreach ($movies as &$movie) {
             $title = $movie['title'] ?? $movie['name']; // Use title for movies and name for TV shows
             $year = substr($movie['release_date'] ?? $movie['first_air_date'], 0, 4); // Extract the year
-            $movie['trailer_url'] = $this->getTrailer($title, $year);
+            // $movie['trailer_url'] = $this->getTrailer($title, $year);            
+            $movie['trailer_url'] = "https://www.youtube.com/embed/lU_NKNZljoQ?si=RssBRMU5do2A2sAK";
         }
 
         // Return the view with movies and their trailers
