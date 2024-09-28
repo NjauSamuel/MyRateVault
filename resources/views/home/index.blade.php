@@ -114,12 +114,20 @@
                     closeModal(id);
                 }
             });
+
+            // Hide the navbar when the modal opens
+            const navbar = document.querySelector('nav');
+            navbar.classList.add('hidden');
         }
 
         function closeModal(id) {
             // Hide the specific modal based on the id
             const modal = document.getElementById('movieModal-' + id);
             modal.classList.add('hidden');
+
+            // Show the navbar again when the modal closes
+            const navbar = document.querySelector('nav');
+            navbar.classList.remove('hidden');
         }
     </script>
 
