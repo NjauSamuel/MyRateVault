@@ -36,3 +36,18 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('movies', MovieController::class)
     ->only(['index']);
+
+// Google Callback URL's:
+
+use Laravel\Socialite\Facades\Socialite;
+ 
+// Redirect to Google
+Route::get('/auth/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google.redirect');
+ 
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+ 
+    // $user->token
+});
