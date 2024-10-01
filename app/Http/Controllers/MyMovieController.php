@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MyMovie;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class MyMovieController extends Controller
 {
@@ -16,18 +17,11 @@ class MyMovieController extends Controller
      */
     public function index()
     {
-        
-         // Fetch movies ordered by rating in descending order
-        $movies = MyMovie::orderBy('rating', 'desc')->get();
+        // Fetch movies for the authenticated user, ordered by rating in descending order
+        $movies = Auth::user()->myMovies()->orderBy('rating', 'desc')->get();
 
-        // Assign rankings and save to database
-        foreach ($movies as $index => $movie) {
-            $movie->ranking = $index + 1; // Rank 1 for the highest rated movie
-            $movie->save(); // Save the ranking to the database
-        }
-
-        // dd($movies);
-        return view('my-movies.index', ['movies' => MyMovie::orderBy('rating', 'desc')->get()]);
+        // Pass the user's movies to the view
+        return view('my-movies.index', ['movies' => $movies]);
     }
 
     /**

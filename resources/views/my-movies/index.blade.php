@@ -42,7 +42,7 @@
                 <div
                     class="front"
                     style=" background-image: url('{{ $movie->img_url }}'); ">
-                    <p class="large">{{ $movie->ranking }}</p>
+                    <p class="large">{{ $loop->iteration }}</p> <!-- Assigns ranking here since the controlle sorts results by ranking any way. -->
                 </div>
 
                 <div class="back">
