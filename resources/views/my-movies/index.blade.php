@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'PHP - Laravel')
+@section('title', 'Favourites')
 
 @section('content')
 
