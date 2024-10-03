@@ -34,8 +34,14 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
+// The trending movies route for now:
 Route::resource('movies', MovieController::class)
     ->only(['index']);
+
+// The Liked movies:
+Route::get('movies/liked', [MovieController::class, 'liked'])
+    ->name('movies.liked');
 
 // Google Callback URL's:
 // Redirect to Google

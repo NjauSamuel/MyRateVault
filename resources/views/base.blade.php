@@ -37,6 +37,14 @@
 
         <title> @yield('title', 'MyRateVault') </title>
 
+        {{-- blade-formatter-disable --}}
+            <style type="text/tailwindcss">
+                .nav-link {
+                    @apply text-gray-700 hover:text-gray-900 font-semibold;
+                }
+            </style>
+        {{-- blade-formatter-enable --}}
+
     </head>
 
     <body>
@@ -84,17 +92,17 @@
                 <ul class="flex flex-col space-y-4 items-center lg:flex-row lg:space-x-6 lg:space-y-0">
                     
                     <li>
-                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="#">
+                        <a class="nav-link" href="{{ route('movies.index') }}">
                             Trending
                         </a>
                     </li>
                     <li>
-                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="">
+                        <a class="nav-link" href="{{ route('my-movies.index') }}">
                             My Vault
                         </a>
                     </li>
                     <li>
-                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="">
+                        <a class="nav-link" href="{{route('movies.liked')}}">
                             Liked
                         </a>
                     </li>
@@ -168,5 +176,29 @@
 
         @yield('content')
 
+        <!-- The applications Footer -->
+        <footer class="bg-white text-center font-semibold shadow-lg border border-t-2 mt-8">
+            <div class="text-center p-3">
+                © {{ now()->year }} Copyright: My Rate Vault
+            </div>
+        </footer>
+
     </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUrl = window.location.pathname; // Get current URL path
+            const navLinks = document.querySelectorAll('.nav-link'); // Select all nav-link elements
+            
+            navLinks.forEach(link => {
+                const linkUrl = new URL(link.href, window.location.origin).pathname; // Get pathname of the link
+                
+                // Check if the link's path matches the current URL path
+                if (linkUrl === currentUrl) {
+                    link.classList.add('nav-link-active'); // Add active class
+                }
+            });
+        });
+    </script>
+
 </html>

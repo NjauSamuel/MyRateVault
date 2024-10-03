@@ -230,3 +230,22 @@ p.overview {
 .form-title p {
     display: inline; /* or inline-block */
 }
+
+/* The active links */
+.nav-link-active {
+    color: #ff0000; /* Change the color to red for the active link */
+    font-weight: bold; /* Make the active link bold */
+    padding-top: 80px;
+}
+
+/* The inactive links */
+.nav-link {
+    color: #4B5563; /* This is equivalent to text-gray-700 */
+    font-weight: 600; /* This is equivalent to font-semibold */
+}
+
+.nav-link:hover {
+    color: #1F2937; /* This is equivalent to hover:text-gray-900 */
+}
+
+

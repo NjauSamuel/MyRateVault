@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'All Movies')
+@section('title', 'Trending')
 
 @section('content')
 

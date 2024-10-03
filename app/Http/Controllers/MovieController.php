@@ -37,8 +37,8 @@ class MovieController extends Controller
 
     public function index()
     {
-        // Cache the entire content of the index method for 6 hours (360 minutes)
-        $movies = Cache::remember('movies_with_trailers', 360, function () {
+        // Cache the entire content of the index method for 24 hours (1440 minutes)
+        $movies = Cache::remember('movies_with_trailers', 1440, function () {
             // Fetch movies from the API
             $response = Http::withOptions(['verify' => false])->get('https://api.themoviedb.org/3/trending/all/day?language=en-US', [
                 'headers' => [
@@ -68,5 +68,11 @@ class MovieController extends Controller
 
         // Return the view with movies and their trailers
         return view('home.index', ['movies' => $movies]);
+    }
+
+    // A list of the liked movies by users. 
+    public function liked()
+    {
+        return view('home.liked');
     }
 }
