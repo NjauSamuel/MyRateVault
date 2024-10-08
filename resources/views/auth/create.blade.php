@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="content p-6">
+    <div class="content p-6 min-h-[70vh]">
 
         <h1 class="heading">Login</h1>
 

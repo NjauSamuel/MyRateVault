@@ -22,28 +22,22 @@
             crossorigin="anonymous"
         />
 
+        <!-- CSS from public/assets -->
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 
-        <link rel="stylesheet" href="{{ asset('assets/js/app.js') }}">
-
-        <!-- Link to the favicon icon -->
+        <!-- Favicon -->
         <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
-        <!-- Alpine JavaScript Framework -->
+        <!-- Alpine.js -->
         <script src="//unpkg.com/alpinejs" defer></script>
 
-        @vite('resources/css/app.css')
+        <!-- Vite: for dynamically loaded assets -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <!-- Custom JS from public/assets -->
+        <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
         <title> @yield('title', 'MyRateVault') </title>
-
-        {{-- blade-formatter-disable --}}
-            <style type="text/tailwindcss">
-                .nav-link {
-                    @apply text-gray-700 hover:text-gray-900 font-semibold;
-                }
-            </style>
-        {{-- blade-formatter-enable --}}
 
     </head>
 
@@ -92,17 +86,17 @@
                 <ul class="flex flex-col space-y-4 items-center lg:flex-row lg:space-x-6 lg:space-y-0">
                     
                     <li>
-                        <a class="nav-link" href="{{ route('movies.index') }}">
+                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="{{ route('movies.index') }}">
                             Trending
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ route('my-movies.index') }}">
+                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="{{ route('my-movies.index') }}">
                             My Vault
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{route('movies.liked')}}">
+                        <a class="text-gray-700 hover:text-gray-900 font-semibold" href="{{route('movies.liked')}}">
                             Liked
                         </a>
                     </li>

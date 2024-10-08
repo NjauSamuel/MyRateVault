@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="content p-6">
+    <div class="content p-6 min-h-[100vh]">
 
         <h1 class="heading">Register</h1>
 
